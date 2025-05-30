@@ -1,0 +1,66 @@
+## Step 1: Laumch an EC2 instance 
+## Step 2 : Install terraform on that by using commands 
+
+ # (i)Install HashiCorp GPG key and repo:
+
+```
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+```
+
+# (ii)Install Terraform:
+
+```
+sudo apt update
+sudo apt install terraform
+```
+
+# (iii) check the installed version by - 
+```
+terraform -v
+```
+
+## Step 3 : Install ```AWS CLI```, ```Kubectl```, ```EKSCTL```:
+ ```AWS CLI``` - AWS CLI is a unified tool for managing AWS services from the command line.
+
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+apt install unzip
+
+unzip awscliv2.zip
+```
+
+- ```Kubectl``` - kubectl is the command-line tool used to interact with Kubernetes clusters.
+```
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.2/2024-07-12/bin/linux/amd64/kubectl
+
+chmod +x kubectl
+
+mv kubectl /usr/local/bin/kubectl
+```    
+- ```EKSCTL``` - eksctl is a command-line tool for managing Amazon EKS (Elastic Kubernetes Service) clusters.
+```
+curl -LO "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz"
+
+tar -xzf eksctl_Linux_amd64.tar.gz
+
+sudo mv eksctl /usr/local/bin/
+
+eksctl version
+
+
+## Step 4: Create EKS Cluster -
+- Create Cluster:
+```
+eksctl create cluster --name test-server --us-east-1 --node-type t2.medium --nodes-min 1 --nodes-max 2
+```
+
+- Get Eks Cluster:
+```
+eksctl get cluster --name test-server --region us-east-1
+```
+- Update Kubeconfig file for  kubectl:
+```
+aws eks update-kubeconfig --name test-server --region us-east-1
