@@ -1,4 +1,4 @@
-## Step 1: Laumch an EC2 instance 
+## Step 1: Launch an EC2 instance 
 ## Step 2 : Install terraform on that by using commands 
 
  # (i)Install HashiCorp GPG key and repo:
