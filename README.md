@@ -49,7 +49,7 @@ tar -xzf eksctl_Linux_amd64.tar.gz
 sudo mv eksctl /usr/local/bin/
 
 eksctl version
-
+```
 
 ## Step 4: Create EKS Cluster -
 - Create Cluster:
@@ -64,3 +64,4 @@ eksctl get cluster --name test-server --region us-east-1
 - Update Kubeconfig file for  kubectl:
 ```
 aws eks update-kubeconfig --name test-server --region us-east-1
+```
